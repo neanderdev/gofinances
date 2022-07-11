@@ -23,6 +23,7 @@ import { TranscationCard } from '../../components/TranscationCard';
 export function Dashboard() {
     const data = [
         {
+            type: 'positive',
             title: 'Desenvolvimento de site',
             amount: 'R$ 12.000,00',
             category: {
@@ -32,26 +33,29 @@ export function Dashboard() {
             date: '11/07/2022',
         },
         {
-            title: 'Desenvolvimento de site',
-            amount: 'R$ 12.000,00',
+            type: 'negative',
+            title: 'Hamburgueria',
+            amount: 'R$ 50,00',
             category: {
                 name: 'Vendas',
-                icon: 'dollar-sign',
+                icon: 'coffee',
             },
             date: '11/07/2022',
         },
         {
-            title: 'Desenvolvimento de site',
-            amount: 'R$ 12.000,00',
+            type: 'negative',
+            title: 'Aluguel',
+            amount: 'R$ 1000,00',
             category: {
                 name: 'Vendas',
-                icon: 'dollar-sign',
+                icon: 'shopping-bag',
             },
             date: '11/07/2022',
         },
         {
-            title: 'Desenvolvimento de site',
-            amount: 'R$ 12.000,00',
+            type: 'positive',
+            title: 'Recebidos',
+            amount: 'R$ 500,00',
             category: {
                 name: 'Vendas',
                 icon: 'dollar-sign',
