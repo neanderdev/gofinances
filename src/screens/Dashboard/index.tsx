@@ -1,5 +1,4 @@
 import React from 'react';
-import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 import {
     Container,
@@ -18,11 +17,16 @@ import {
 } from './styles';
 
 import { HighlightCard } from '../../components/HighlightCard';
-import { TranscationCard } from '../../components/TranscationCard';
+import { TranscationCard, TransactionCardProps } from '../../components/TranscationCard';
+
+export interface DataListProps extends TransactionCardProps {
+    id: number;
+}
 
 export function Dashboard() {
-    const data = [
+    const data: DataListProps[] = [
         {
+            id: 1,
             type: 'positive',
             title: 'Desenvolvimento de site',
             amount: 'R$ 12.000,00',
@@ -33,6 +37,7 @@ export function Dashboard() {
             date: '11/07/2022',
         },
         {
+            id: 2,
             type: 'negative',
             title: 'Hamburgueria',
             amount: 'R$ 50,00',
@@ -43,22 +48,13 @@ export function Dashboard() {
             date: '11/07/2022',
         },
         {
+            id: 3,
             type: 'negative',
             title: 'Aluguel',
             amount: 'R$ 1000,00',
             category: {
                 name: 'Vendas',
                 icon: 'shopping-bag',
-            },
-            date: '11/07/2022',
-        },
-        {
-            type: 'positive',
-            title: 'Recebidos',
-            amount: 'R$ 500,00',
-            category: {
-                name: 'Vendas',
-                icon: 'dollar-sign',
             },
             date: '11/07/2022',
         },
@@ -109,13 +105,11 @@ export function Dashboard() {
 
                 <TransactionList
                     data={data}
+                    keyExtractor={item => item.id.toString()}
                     renderItem={({ item }) => <TranscationCard
                         data={item}
-                    />}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{
-                        paddingBottom: getBottomSpace(),
-                    }}
+                    />
+                    }
                 />
             </Transactions>
         </Container>

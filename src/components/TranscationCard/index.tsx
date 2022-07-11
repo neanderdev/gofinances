@@ -16,19 +16,19 @@ interface Category {
     icon: string;
 }
 
-interface Data {
+export interface TransactionCardProps {
     type: 'positive' | 'negative';
     title: string;
     amount: string;
     category: Category;
-    date: string;
+    date: string
 }
 
-interface TranscationCardProps {
-    data: Data;
+interface Props {
+    data: TransactionCardProps;
 }
 
-export function TranscationCard({ data }: TranscationCardProps) {
+export function TranscationCard({ data }: Props) {
     return (
         <Container>
             <Title>
