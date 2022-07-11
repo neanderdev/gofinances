@@ -8,8 +8,9 @@ import {
   Poppins_500Medium,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins';
-import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import "react-native-gesture-handler";
 
 import theme from "./src/global/styles/theme";
 
@@ -49,17 +50,19 @@ export default function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <View
-          onLayout={onLayoutRootView}
-          style={{
-            flex: 1
-          }}
-        >
-          <AppRoutes />
-        </View>
-      </NavigationContainer>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
+          <View
+            onLayout={onLayoutRootView}
+            style={{
+              flex: 1
+            }}
+          >
+            <AppRoutes />
+          </View>
+        </NavigationContainer>
+      </ThemeProvider>
+    </GestureHandlerRootView>
   )
 }
