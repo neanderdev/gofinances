@@ -1,4 +1,5 @@
 import React from 'react';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 import {
     Container,
@@ -13,12 +14,52 @@ import {
     HighlightCards,
     Transactions,
     Title,
+    TransactionList,
 } from './styles';
 
 import { HighlightCard } from '../../components/HighlightCard';
 import { TranscationCard } from '../../components/TranscationCard';
 
 export function Dashboard() {
+    const data = [
+        {
+            title: 'Desenvolvimento de site',
+            amount: 'R$ 12.000,00',
+            category: {
+                name: 'Vendas',
+                icon: 'dollar-sign',
+            },
+            date: '11/07/2022',
+        },
+        {
+            title: 'Desenvolvimento de site',
+            amount: 'R$ 12.000,00',
+            category: {
+                name: 'Vendas',
+                icon: 'dollar-sign',
+            },
+            date: '11/07/2022',
+        },
+        {
+            title: 'Desenvolvimento de site',
+            amount: 'R$ 12.000,00',
+            category: {
+                name: 'Vendas',
+                icon: 'dollar-sign',
+            },
+            date: '11/07/2022',
+        },
+        {
+            title: 'Desenvolvimento de site',
+            amount: 'R$ 12.000,00',
+            category: {
+                name: 'Vendas',
+                icon: 'dollar-sign',
+            },
+            date: '11/07/2022',
+        },
+    ];
+
     return (
         <Container>
             <Header>
@@ -62,7 +103,16 @@ export function Dashboard() {
             <Transactions>
                 <Title>Listagem</Title>
 
-                <TranscationCard />
+                <TransactionList
+                    data={data}
+                    renderItem={({ item }) => <TranscationCard
+                        data={item}
+                    />}
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={{
+                        paddingBottom: getBottomSpace(),
+                    }}
+                />
             </Transactions>
         </Container>
     );
