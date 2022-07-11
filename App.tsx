@@ -8,10 +8,11 @@ import {
   Poppins_500Medium,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins';
+import 'react-native-gesture-handler';
 
 import theme from "./src/global/styles/theme";
 
-import { CategorySelect } from './src/screens/CategorySelect';
+import { Register } from './src/screens/Register';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -54,7 +55,7 @@ export default function App() {
           flex: 1
         }}
       >
-        <CategorySelect />
+        <Register />
       </View>
     </ThemeProvider>
   )
