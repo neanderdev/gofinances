@@ -1,3 +1,7 @@
+import "react-native-gesture-handler";
+import "intl";
+import "intl/locale-data/jsonp/pt-BR";
+
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { ThemeProvider } from 'styled-components';
@@ -10,7 +14,6 @@ import {
 } from '@expo-google-fonts/poppins';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import "react-native-gesture-handler";
 
 import theme from "./src/global/styles/theme";
 
