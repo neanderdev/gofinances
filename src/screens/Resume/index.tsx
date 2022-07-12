@@ -49,6 +49,7 @@ export function Resume() {
     const [totalByCategories, setTotalByCategories] = useState<CategoryData[]>([]);
 
     const theme = useTheme();
+    const bottomTabBarHeight = useBottomTabBarHeight();
 
     function handleDateChange(action: "next" | "prev") {
         if (action === "next") {
@@ -132,7 +133,7 @@ export function Resume() {
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{
                         paddingHorizontal: 24,
-                        paddingBottom: useBottomTabBarHeight(),
+                        paddingBottom: bottomTabBarHeight,
                     }}
                 >
                     <MonthSelect>

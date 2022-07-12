@@ -18,7 +18,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import theme from "./src/global/styles/theme";
 
-import { AppRoutes } from './src/routes/app.routes';
+import { SignIn } from "./src/screens/SignIn";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -69,7 +69,7 @@ export default function App() {
               translucent
             />
 
-            <AppRoutes />
+            <SignIn />
           </View>
         </NavigationContainer>
       </ThemeProvider>
