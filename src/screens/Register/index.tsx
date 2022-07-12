@@ -9,6 +9,12 @@ import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import uuid from "react-native-uuid";
+import {
+    useNavigation,
+    NavigationProp,
+    ParamListBase,
+} from "@react-navigation/native";
 
 import {
     Container,
@@ -39,16 +45,19 @@ export function Register() {
     const [transactionType, setTransactionType] = useState('');
     const [categoryModalOpen, setCategoryModalOpen] = useState(false);
 
+    const dataKey = '@gofinances:transactions';
+
     const [category, setCategory] = useState({
         key: 'category',
         name: 'Categoria',
     });
 
-    const dataKey = '@gofinances:transactions';
+    const { navigate }: NavigationProp<ParamListBase> = useNavigation();
 
     const {
         control,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(schema),
@@ -76,10 +85,12 @@ export function Register() {
         }
 
         const newTransaction = {
+            id: String(uuid.v4()),
             name: form.name,
             amount: form.amount,
             transactionType,
             category: category.key,
+            date: new Date(),
         };
 
         try {
@@ -92,6 +103,16 @@ export function Register() {
             ];
 
             await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+
+            setTransactionType('');
+            setCategory({
+                key: 'category',
+                name: 'Categoria',
+            });
+
+            reset();
+
+            navigate("Listagem");
         } catch (error) {
             console.log(error);
 
@@ -107,12 +128,6 @@ export function Register() {
         }
 
         loadData();
-
-        // async function removeAll() {
-        //     await AsyncStorage.removeItem(dataKey);
-        // }
-
-        // removeAll();
     }, []);
 
     return (
