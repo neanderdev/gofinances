@@ -18,7 +18,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import theme from "./src/global/styles/theme";
 
-import { AuthContext } from "./src/AuthContext";
+import { AuthProvider } from "./src/hooks/auth";
 
 import { SignIn } from "./src/screens/SignIn";
 
@@ -71,9 +71,9 @@ export default function App() {
               translucent
             />
 
-            <AuthContext.Provider value={[]}>
+            <AuthProvider>
               <SignIn />
-            </AuthContext.Provider>
+            </AuthProvider>
           </View>
         </NavigationContainer>
       </ThemeProvider>
