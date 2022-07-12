@@ -13,14 +13,13 @@ import {
   Poppins_500Medium,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins';
-import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import theme from "./src/global/styles/theme";
 
 import { AuthProvider } from "./src/hooks/auth";
 
-import { SignIn } from "./src/screens/SignIn";
+import { Routes } from './src/routes';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -58,24 +57,22 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <View
-            onLayout={onLayoutRootView}
-            style={{
-              flex: 1
-            }}
-          >
-            <StatusBar
-              barStyle="light-content"
-              backgroundColor="transparent"
-              translucent
-            />
+        <View
+          onLayout={onLayoutRootView}
+          style={{
+            flex: 1
+          }}
+        >
+          <StatusBar
+            barStyle="light-content"
+            backgroundColor="transparent"
+            translucent
+          />
 
-            <AuthProvider>
-              <SignIn />
-            </AuthProvider>
-          </View>
-        </NavigationContainer>
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
+        </View>
       </ThemeProvider>
     </GestureHandlerRootView>
   )
