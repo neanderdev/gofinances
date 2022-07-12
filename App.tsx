@@ -3,6 +3,7 @@ import "intl";
 import "intl/locale-data/jsonp/pt-BR";
 
 import React, { useCallback, useEffect, useState } from 'react';
+import { StatusBar } from "react-native";
 import { View } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import * as SplashScreen from 'expo-splash-screen';
@@ -62,6 +63,12 @@ export default function App() {
               flex: 1
             }}
           >
+            <StatusBar
+              barStyle="light-content"
+              backgroundColor="transparent"
+              translucent
+            />
+
             <AppRoutes />
           </View>
         </NavigationContainer>
