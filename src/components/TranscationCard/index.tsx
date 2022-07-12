@@ -28,8 +28,6 @@ interface Props {
 export function TranscationCard({ data }: Props) {
     const [category] = categories.filter(item => item.key === data.category);
 
-    console.log(data);
-
     return (
         <Container>
             <Title>
