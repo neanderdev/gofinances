@@ -21,6 +21,12 @@ import { AuthProvider, useAuth } from "./src/hooks/auth";
 
 import { Routes } from './src/routes';
 
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  "EventEmitter.removeListener('url', ...): Method has been deprecated. Please instead use `remove()` on the subscription returned by `EventEmitter.addListener`."
+])
+
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
