@@ -27,6 +27,8 @@ interface IAuthContextData {
     user: User;
     signInWithGoogle: () => Promise<void>;
     signInWithApple: () => Promise<void>;
+    signOut: () => Promise<void>;
+    userStorageLoading: boolean;
 }
 
 interface AuthorizationResponse {
@@ -88,7 +90,7 @@ function AuthProvider({ children }: AuthProviderProps) {
                     id: String(credential.user),
                     name: credential.fullName!.givenName!,
                     email: credential.email!,
-                    photo: undefined,
+                    photo: `https://ui-avatars.com/api/?name=${credential.fullName!.givenName!}`,
                 }
 
                 setUser(userLogged);
@@ -98,6 +100,12 @@ function AuthProvider({ children }: AuthProviderProps) {
         } catch (error: any) {
             throw new Error(error);
         }
+    }
+
+    async function signOut() {
+        setUser({} as User);
+
+        await AsyncStorage.removeItem(userStorageKey);
     }
 
     useEffect(() => {
@@ -117,7 +125,13 @@ function AuthProvider({ children }: AuthProviderProps) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, signInWithGoogle, signInWithApple }}>
+        <AuthContext.Provider value={{
+            user,
+            signInWithGoogle,
+            signInWithApple,
+            signOut,
+            userStorageLoading
+        }}>
             {children}
         </AuthContext.Provider>
     );

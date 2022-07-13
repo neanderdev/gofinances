@@ -22,6 +22,8 @@ import {
     LoadContainer,
 } from './styles';
 
+import { useAuth } from '../../hooks/auth';
+
 import { HighlightCard } from '../../components/HighlightCard';
 import { TranscationCard, TransactionCardProps } from '../../components/TranscationCard';
 
@@ -41,6 +43,8 @@ export interface DataListProps extends TransactionCardProps {
 }
 
 export function Dashboard() {
+    const { signOut, user } = useAuth();
+
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState<DataListProps[]>([]);
     const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData);
@@ -156,16 +160,16 @@ export function Dashboard() {
                         <UserWrapper>
                             <UserInfo>
                                 <Photo
-                                    source={{ uri: "https://github.com/neanderdev.png" }}
+                                    source={{ uri: user.photo }}
                                 />
 
                                 <User>
                                     <UserGreenting>Olá,</UserGreenting>
-                                    <UserName>Neander</UserName>
+                                    <UserName>{user.name}</UserName>
                                 </User>
                             </UserInfo>
 
-                            <LogoutButton onPress={() => { }}>
+                            <LogoutButton onPress={signOut}>
                                 <Icon name="power" />
                             </LogoutButton>
                         </UserWrapper>

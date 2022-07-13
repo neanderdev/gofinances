@@ -17,7 +17,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import theme from "./src/global/styles/theme";
 
-import { AuthProvider } from "./src/hooks/auth";
+import { AuthProvider, useAuth } from "./src/hooks/auth";
 
 import { Routes } from './src/routes';
 
@@ -50,7 +50,9 @@ export default function App() {
     }
   }, [appIsReady]);
 
-  if (!appIsReady) {
+  const { userStorageLoading } = useAuth();
+
+  if (!appIsReady || userStorageLoading) {
     return null;
   }
 
