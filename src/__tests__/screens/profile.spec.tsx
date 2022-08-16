@@ -1,10 +1,12 @@
-import React from "react";
-import { render } from "@testing-library/react-native";
+import React from 'react'
+import { render } from '@testing-library/react-native'
 
-import { Profile } from "../../screens/Profile";
+import { Profile } from '../../screens/Profile'
 
 test('check if show correctly user input name placeholder', () => {
-    const { debug } = render(<Profile />);
+    const { getByPlaceholderText } = render(<Profile />);
 
-    debug();
-});
+    const inputName = getByPlaceholderText('Nome');
+
+    expect(inputName.props.placeholder).toBeTruthy();
+})
