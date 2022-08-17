@@ -70,7 +70,9 @@ export function Register() {
     }
 
     function handlOpenSelectCategoryModal() {
-        setCategoryModalOpen(true);
+        setTimeout(() => {
+            setCategoryModalOpen(true);
+        }, 500);
     }
 
     function handleCloseSelectCategoryModal() {
