@@ -1,39 +1,57 @@
+import 'jest-fetch-mock';
+
 import { renderHook, act } from '@testing-library/react-hooks';
+import fetchMock from 'jest-fetch-mock';
+import { mocked } from 'ts-jest/utils';
+import { startAsync } from 'expo-auth-session';
 
 import { AuthProvider, useAuth } from './auth';
 
-jest.mock('expo-auth-session', () => {
-    return {
-        startAsync: () => {
-            return {
-                type: 'success',
-                params: {
-                    access_token: 'google-token'
-                }
-            }
-        }
-    }
-});
+fetchMock.enableMocks();
+
+const userTest = {
+    id: 'any_id',
+    email: 'john.doe@email.com',
+    name: 'John Doe',
+    photo: 'any_photo.png'
+};
+
+jest.mock('expo-auth-session');
 
 describe('Auth Hook', () => {
-    it('should be able to sign in with Google account existed', async () => {
-        global.fetch = jest.fn(() => Promise.resolve({
-            json: () => Promise.resolve({
-                id: `userInfo.id`,
-                email: `userInfo.email`,
-                name: `userInfo.name`,
-                photo: `userInfo.photo`,
-                locale: `userInfo.locale`,
-                verified_email: `userInfo.verified_email`,
-            })
-        })) as jest.Mock;
+    it('should be able to sign in with Google account existing', async () => {
+        const googleMocked = mocked(startAsync as any);
+
+        googleMocked.mockReturnValueOnce({
+            type: 'success',
+            params: {
+                access_token: 'any_token',
+            }
+        });
+
+        fetchMock.mockResponseOnce(JSON.stringify(userTest));
 
         const { result } = renderHook(() => useAuth(), {
-            wrapper: AuthProvider,
+            wrapper: AuthProvider
         });
 
         await act(() => result.current.signInWithGoogle());
 
-        expect(result.current.user).toBeTruthy();
+        expect(result.current.user.email)
+            .toBe(userTest.email);
+    });
+
+    it('user should not connect if cancel authentication with Google', async () => {
+        const googleMocked = mocked(startAsync as any);
+        googleMocked.mockReturnValueOnce({ type: 'cancel' });
+
+        const { result } = renderHook(() => useAuth(), {
+            wrapper: AuthProvider
+        });
+
+        await act(() => result.current.signInWithGoogle());
+
+        // expect(result.current.user).not.toHaveProperty('id');
+        expect(result.current.user).not.toHaveProperty('name');
     });
 });
