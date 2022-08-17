@@ -36,5 +36,7 @@ describe('Input Component', () => {
         const inputComponent = getByTestId('input-email');
 
         expect(inputComponent.props.style[0].borderColor).toEqual('#E83F5B');
+
+        expect(inputComponent.props.style[0].borderWidth).toEqual(3);
     });
 });
