@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { render } from '@testing-library/react-native';
+import { ThemeProvider } from 'styled-components/native';
 
 import { Input } from '.';
+
+import theme from '../../../global/styles/theme';
+
+interface ProviderProps {
+    children: ReactNode;
+}
+
+function Provider({ children }: ProviderProps) {
+    return (
+        <ThemeProvider theme={theme}>
+            {children}
+        </ThemeProvider>
+    );
+}
 
 describe('Input Component', () => {
     it('must have specific border color when active', () => {
@@ -12,7 +27,10 @@ describe('Input Component', () => {
                 keyboardType='email-address'
                 autoCorrect={false}
                 active={true}
-            />
+            />,
+            {
+                wrapper: Provider,
+            }
         );
 
         const inputComponent = getByTestId('input-email');
