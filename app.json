@@ -6,8 +6,17 @@
     "slug": "gofinances",
     "scheme": "gofinances",
     "version": "1.0.0",
+    "description": "App desenvolvido durante a trilha React Native do Ignite da Rocketseat!",
+    "githubUrl": "https://github.com/neanderdev/gofinances",
     "icon": "./assets/icon.png",
-    "assetBundlePatterns": ["**/*"],
+    "primaryColor": "#5636D3",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#5636D3"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "com.gofinances",
       "buildNumber": "1.0.0"
